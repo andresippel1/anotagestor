@@ -1,0 +1,53 @@
+.estoque-topo {
+  display: flex;
+  flex-direction: column;
+  gap: 0.75rem;
+  margin-bottom: 1.25rem;
+}
+
+.estoque-topo p {
+  color: var(--cor-texto-secundario);
+  margin: 0;
+}
+
+@media (min-width: 640px) {
+  .estoque-topo {
+    flex-direction: row;
+    align-items: center;
+    justify-content: space-between;
+  }
+}
+
+.estoque-relatorio-acoes {
+  display: flex;
+  flex-direction: column;
+  gap: 0.75rem;
+  margin-bottom: 1.25rem;
+}
+
+.estoque-checkbox {
+  display: flex;
+  align-items: center;
+  gap: 0.6rem;
+  color: var(--cor-texto-secundario);
+  font-size: 0.95rem;
+}
+
+.estoque-checkbox input {
+  width: 20px;
+  height: 20px;
+}
+
+.estoque-relatorio-botoes {
+  display: flex;
+  gap: 0.75rem;
+  flex-wrap: wrap;
+}
+
+@media (min-width: 640px) {
+  .estoque-relatorio-acoes {
+    flex-direction: row;
+    align-items: center;
+    justify-content: space-between;
+  }
+}

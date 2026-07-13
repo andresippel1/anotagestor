@@ -1,0 +1,138 @@
+.pagina-login {
+  --login-acento: #ff6b35;
+  --login-acento-hover: #ff8555;
+  min-height: 100vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 1.5rem;
+  background:
+    radial-gradient(circle at 0% 100%, rgba(255, 107, 53, 0.22), transparent 50%),
+    radial-gradient(circle at 100% 0%, rgba(255, 107, 53, 0.16), transparent 50%),
+    #0b0c10;
+}
+
+.login-card {
+  width: 100%;
+  max-width: 380px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
+  gap: 0.35rem;
+  padding: 2rem 1.75rem;
+  background: rgba(20, 20, 22, 0.9);
+  border: 1px solid rgba(255, 255, 255, 0.08);
+  backdrop-filter: blur(6px);
+  box-shadow: 0 20px 60px rgba(0, 0, 0, 0.5);
+}
+
+.login-assinatura {
+  width: clamp(160px, 42vw, 240px);
+  height: auto;
+  margin-bottom: 1.25rem;
+}
+
+.login-card h1 {
+  color: var(--cor-texto);
+  font-size: 1.6rem;
+  margin-bottom: 0.5rem;
+}
+
+.login-subtitulo {
+  display: flex;
+  align-items: center;
+  gap: 0.6rem;
+  color: var(--cor-texto-secundario);
+  margin-bottom: 1.5rem;
+}
+
+.login-linha {
+  flex: 1;
+  height: 1px;
+  background: rgba(255, 107, 53, 0.35);
+}
+
+.login-card form {
+  width: 100%;
+  text-align: left;
+}
+
+.login-campo-com-icone {
+  position: relative;
+  display: flex;
+  align-items: center;
+}
+
+.login-card .login-campo-com-icone input {
+  width: 100%;
+  padding-left: 3.25rem !important;
+}
+
+.login-card .login-campo-senha input {
+  padding-right: 3rem !important;
+}
+
+.login-card .login-campo-com-icone input:focus {
+  outline: none;
+}
+
+.login-campo-com-icone:focus-within {
+  border-radius: var(--raio-pequeno);
+  box-shadow: 0 0 0 2px var(--login-acento);
+}
+
+.login-icone-esquerda {
+  position: absolute;
+  left: 1rem;
+  width: 18px;
+  height: 18px;
+  color: var(--cor-texto-secundario);
+  pointer-events: none;
+  z-index: 1;
+}
+
+.login-olho-senha {
+  position: absolute;
+  right: 0.25rem;
+  width: 44px;
+  height: 44px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: none;
+  border: none;
+  font-size: 1.2rem;
+  line-height: 1;
+  opacity: 0.75;
+}
+
+.login-olho-senha:hover {
+  opacity: 1;
+}
+
+.login-esqueci-senha {
+  display: block;
+  margin: 0.25rem 0 1rem;
+  padding: 0;
+  background: none;
+  border: none;
+  font-size: 0.85rem;
+  color: var(--login-acento);
+  text-align: right;
+  width: 100%;
+}
+
+.login-aviso {
+  color: var(--login-acento);
+  font-size: 0.85rem;
+}
+
+.login-card .btn-primario {
+  background: var(--login-acento);
+  color: #ffffff;
+}
+
+.login-card .btn-primario:hover {
+  background: var(--login-acento-hover);
+}

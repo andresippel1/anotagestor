@@ -1,0 +1,46 @@
+.mesa-card {
+  background: var(--cor-fundo-card);
+  border: 2px solid var(--cor-borda);
+  border-radius: var(--raio);
+  padding: 1.25rem;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 0.5rem;
+  text-align: center;
+  min-height: 150px;
+  justify-content: center;
+}
+
+.mesa-numero {
+  font-size: 1.4rem;
+  font-weight: 700;
+}
+
+.mesa-status {
+  font-size: 0.95rem;
+  color: var(--cor-texto-secundario);
+  text-transform: uppercase;
+  letter-spacing: 0.04em;
+}
+
+.mesa-livre {
+  border-color: var(--cor-sucesso);
+}
+
+.mesa-aberta {
+  border-color: var(--cor-alerta);
+  background: rgba(255, 200, 87, 0.08);
+}
+
+.mesa-fechada {
+  border-color: var(--cor-borda);
+  opacity: 0.75;
+}
+
+.mesa-btn-acao {
+  width: 100%;
+  margin-top: 0.5rem;
+  font-size: 1.05rem;
+  padding: 0.9rem;
+}

@@ -1,0 +1,10 @@
+.despesas-abas {
+  display: flex;
+  gap: 0.75rem;
+  margin-bottom: 1.25rem;
+}
+
+.despesas-abas .btn {
+  flex: 1;
+  max-width: 200px;
+}

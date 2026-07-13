@@ -1,0 +1,81 @@
+/* Padrão compartilhado: qualquer bloco com a classe .imprimir-area
+   é o único conteúdo visível ao imprimir. Use junto com .imprimir-a4
+   (relatórios, estoque) OU .imprimir-termica (comanda, comprovante). */
+.imprimir-area {
+  display: none;
+}
+
+@media print {
+  body * {
+    visibility: hidden;
+  }
+
+  .imprimir-area,
+  .imprimir-area * {
+    visibility: visible;
+  }
+
+  .imprimir-area {
+    display: block;
+    position: absolute;
+    top: 0;
+    left: 0;
+    color: #000;
+  }
+
+  .imprimir-area table {
+    width: 100%;
+    border-collapse: collapse;
+  }
+
+  /* A4: relatórios de vendas e de estoque */
+  .imprimir-a4 {
+    width: 100%;
+    font-size: 13px;
+  }
+
+  .imprimir-a4 th,
+  .imprimir-a4 td {
+    padding: 0.35rem 0.5rem;
+    border-bottom: 1px solid #ccc;
+    text-align: left;
+  }
+
+  /* Térmica: bobina de 58mm, área imprimível real de 48mm (impressora do Thiago) */
+  .imprimir-termica {
+    width: 48mm;
+    font-family: 'Courier New', Courier, monospace;
+    font-size: 12px;
+    line-height: 1.4;
+  }
+
+  .imprimir-termica h3,
+  .imprimir-termica h4 {
+    font-size: 14px;
+    margin: 1mm 0;
+    text-align: center;
+  }
+
+  .imprimir-termica .termica-logo {
+    display: block;
+    max-width: 40mm;
+    max-height: 20mm;
+    margin: 0 auto 1mm;
+  }
+
+  .imprimir-termica hr {
+    border: none;
+    border-top: 1px dashed #000;
+    margin: 1.5mm 0;
+  }
+
+  .imprimir-termica td {
+    padding: 0.5mm 0;
+    vertical-align: top;
+  }
+
+  .imprimir-termica .comprovante-valor {
+    text-align: right;
+    white-space: nowrap;
+  }
+}

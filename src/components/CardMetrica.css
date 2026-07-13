@@ -1,0 +1,36 @@
+.card-metrica {
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+  align-items: flex-start;
+}
+
+.card-metrica-badge {
+  width: 42px;
+  height: 42px;
+  border-radius: var(--raio-pequeno);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 1.25rem;
+  margin-bottom: 0.35rem;
+}
+
+.card-metrica-titulo {
+  color: var(--cor-texto-secundario);
+  font-size: 0.9rem;
+}
+
+.card-metrica-valor {
+  font-size: 1.8rem;
+}
+
+.tom-neutro { color: var(--cor-texto); }
+.tom-sucesso { color: var(--cor-sucesso); }
+.tom-erro { color: var(--cor-erro); }
+.tom-alerta { color: var(--cor-alerta); }
+
+.tom-fundo-neutro { background: rgba(245, 246, 248, 0.1); color: var(--cor-texto); }
+.tom-fundo-sucesso { background: rgba(53, 201, 143, 0.15); color: var(--cor-sucesso); }
+.tom-fundo-erro { background: rgba(255, 92, 92, 0.15); color: var(--cor-erro); }
+.tom-fundo-alerta { background: rgba(255, 200, 87, 0.15); color: var(--cor-alerta); }

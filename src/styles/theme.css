@@ -1,0 +1,36 @@
+:root {
+  --cor-fundo: #0f1115;
+  --cor-fundo-elevado: #181b21;
+  --cor-fundo-card: #1e222a;
+  --cor-borda: #2a2f3a;
+
+  --cor-texto: #f5f6f8;
+  --cor-texto-secundario: #a7adba;
+
+  --cor-primaria: #ff6b35;
+  --cor-primaria-hover: #ff8555;
+  --cor-secundaria: #0f1115;
+
+  --cor-sucesso: #35c98f;
+  --cor-erro: #ff5c5c;
+  --cor-alerta: #ffc857;
+
+  --raio: 14px;
+  --raio-pequeno: 8px;
+
+  --fonte-base: 16px;
+  --fonte-grande: 1.15rem;
+  --fonte-titulo: 1.6rem;
+
+  --sombra: 0 4px 18px rgba(0, 0, 0, 0.35);
+}
+
+/* Tema claro opcional (empresa pode alternar futuramente) */
+[data-tema='claro'] {
+  --cor-fundo: #f5f6f8;
+  --cor-fundo-elevado: #ffffff;
+  --cor-fundo-card: #ffffff;
+  --cor-borda: #e1e4ea;
+  --cor-texto: #14161a;
+  --cor-texto-secundario: #565c69;
+}

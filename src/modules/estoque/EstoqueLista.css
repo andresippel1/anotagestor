@@ -1,0 +1,25 @@
+.estoque-tabela-wrap {
+  overflow-x: auto;
+  padding: 0.5rem;
+}
+
+.estoque-acoes {
+  display: flex;
+  gap: 0.5rem;
+  white-space: nowrap;
+}
+
+.estoque-acoes .btn {
+  padding: 0.5rem 0.85rem;
+  font-size: 0.9rem;
+}
+
+.estoque-vazio {
+  color: var(--cor-texto-secundario);
+  padding: 2rem 0;
+  text-align: center;
+}
+
+.estoque-item-nome {
+  font-weight: 600;
+}

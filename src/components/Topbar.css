@@ -1,0 +1,98 @@
+.topbar {
+  position: sticky;
+  top: 0;
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+  padding: 1rem 1.25rem;
+  background: var(--cor-fundo);
+  border-bottom: 1px solid var(--cor-borda);
+  z-index: 20;
+}
+
+.topbar-titulo {
+  font-size: var(--fonte-titulo);
+  flex: 1;
+}
+
+.topbar-menu-btn {
+  background: none;
+  border: none;
+  color: var(--cor-texto);
+  font-size: 1.5rem;
+  padding: 0.25rem 0.5rem;
+}
+
+.topbar-acoes {
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+}
+
+.topbar-loja {
+  display: none;
+  align-items: center;
+  gap: 0.5rem;
+  padding: 0.5rem 0.9rem;
+  border: 1px solid var(--cor-borda);
+  border-radius: 999px;
+  font-size: 0.9rem;
+  font-weight: 600;
+  max-width: 220px;
+}
+
+.topbar-loja-nome {
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.topbar-seletor-empresa {
+  background: var(--cor-fundo-elevado);
+  border: 1px solid var(--login-acento, var(--cor-primaria));
+  color: var(--cor-texto);
+  border-radius: 999px;
+  padding: 0.5rem 0.9rem;
+  font-size: 0.9rem;
+  font-weight: 600;
+  max-width: 180px;
+}
+
+@media (min-width: 640px) {
+  .topbar-seletor-empresa {
+    max-width: 240px;
+  }
+}
+
+.topbar-sino {
+  background: none;
+  border: none;
+  font-size: 1.25rem;
+  color: var(--cor-texto);
+  padding: 0.25rem;
+}
+
+.topbar-avatar {
+  width: 38px;
+  height: 38px;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border: 1px solid var(--cor-borda);
+  font-weight: 700;
+  font-size: 0.95rem;
+  flex-shrink: 0;
+}
+
+@media (min-width: 640px) {
+  .topbar-loja {
+    display: flex;
+  }
+}
+
+@media (min-width: 960px) {
+  .topbar-menu-btn {
+    display: none;
+  }
+}

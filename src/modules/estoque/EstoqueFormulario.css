@@ -1,0 +1,87 @@
+.modal-fundo {
+  position: fixed;
+  inset: 0;
+  background: rgba(0, 0, 0, 0.6);
+  display: flex;
+  align-items: flex-end;
+  justify-content: center;
+  z-index: 50;
+  padding: 0;
+}
+
+.modal-card {
+  width: 100%;
+  max-width: 640px;
+  max-height: 90vh;
+  overflow-y: auto;
+  overflow-x: hidden;
+  border-radius: var(--raio) var(--raio) 0 0;
+}
+
+.linha-campos {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) minmax(0, 1fr);
+  gap: 1rem;
+}
+
+.linha-campos .campo {
+  min-width: 0;
+}
+
+.linha-campos input,
+.linha-campos select {
+  width: 100%;
+  min-width: 0;
+}
+
+.form-secao {
+  margin: 1.25rem 0 0.75rem;
+  padding-top: 1rem;
+  border-top: 1px solid var(--cor-borda);
+  color: var(--cor-texto-secundario);
+  font-size: 0.85rem;
+  text-transform: uppercase;
+  letter-spacing: 0.04em;
+}
+
+.form-secao:first-of-type {
+  margin-top: 0;
+  padding-top: 0;
+  border-top: none;
+}
+
+.campo-checkbox label {
+  display: flex;
+  align-items: center;
+  gap: 0.6rem;
+  color: var(--cor-texto);
+  font-size: var(--fonte-grande);
+}
+
+.campo-checkbox input[type='checkbox'] {
+  width: 22px;
+  height: 22px;
+}
+
+.modal-acoes {
+  display: flex;
+  justify-content: flex-end;
+  gap: 0.75rem;
+  margin-top: 0.5rem;
+}
+
+@media (max-width: 420px) {
+  .linha-campos {
+    grid-template-columns: 1fr;
+  }
+}
+
+@media (min-width: 640px) {
+  .modal-fundo {
+    align-items: center;
+  }
+
+  .modal-card {
+    border-radius: var(--raio);
+  }
+}

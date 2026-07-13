@@ -1,0 +1,58 @@
+.comanda-item {
+  display: grid;
+  grid-template-columns: 1fr auto;
+  gap: 0.75rem;
+  align-items: center;
+  padding: 0.9rem 0;
+  border-bottom: 1px solid var(--cor-borda);
+}
+
+.comanda-item-info {
+  display: flex;
+  flex-direction: column;
+  gap: 0.15rem;
+  grid-column: 1 / -1;
+}
+
+.comanda-item-info strong {
+  font-size: 1.1rem;
+}
+
+.comanda-item-info span {
+  color: var(--cor-texto-secundario);
+  font-size: 0.85rem;
+}
+
+.comanda-item-qtd {
+  display: flex;
+  align-items: center;
+  gap: 0.6rem;
+}
+
+.comanda-qtd-btn {
+  width: 44px;
+  height: 44px;
+  padding: 0;
+  font-size: 1.4rem;
+  line-height: 1;
+  border-radius: 999px;
+}
+
+.comanda-qtd-valor {
+  min-width: 28px;
+  text-align: center;
+  font-size: 1.15rem;
+  font-weight: 700;
+}
+
+.comanda-item-subtotal {
+  justify-self: end;
+  font-size: 1.1rem;
+}
+
+.comanda-item-remover {
+  grid-column: 1 / -1;
+  justify-self: start;
+  padding: 0.6rem 1rem;
+  font-size: 0.95rem;
+}

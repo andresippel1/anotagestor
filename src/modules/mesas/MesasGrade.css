@@ -1,0 +1,11 @@
+.mesas-grade {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(150px, 1fr));
+  gap: 1rem;
+}
+
+.mesas-vazio {
+  color: var(--cor-texto-secundario);
+  padding: 2rem 0;
+  text-align: center;
+}
