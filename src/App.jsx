@@ -3,6 +3,7 @@ import { AuthProvider } from './modules/auth/AuthContext'
 import RotaProtegida from './modules/auth/RotaProtegida'
 import LayoutPrincipal from './layouts/LayoutPrincipal'
 
+import Home from './pages/Home'
 import Login from './pages/Login'
 import Dashboard from './pages/Dashboard'
 import PDV from './pages/PDV'
@@ -22,29 +23,28 @@ export default function App() {
     <BrowserRouter>
       <AuthProvider>
         <Routes>
+          <Route path="/" element={<Home />} />
           <Route path="/login" element={<Login />} />
 
           <Route
-            path="/"
             element={
               <RotaProtegida>
                 <LayoutPrincipal />
               </RotaProtegida>
             }
           >
-            <Route index element={<Navigate to="/dashboard" replace />} />
-            <Route path="dashboard" element={<Dashboard />} />
-            <Route path="pdv" element={<PDV />} />
-            <Route path="mesas" element={<Mesas />} />
-            <Route path="estoque" element={<Estoque />} />
-            <Route path="produtos" element={<Produtos />} />
-            <Route path="despesas" element={<Despesas />} />
-            <Route path="fluxo-caixa" element={<FluxoCaixa />} />
-            <Route path="relatorios" element={<Relatorios />} />
-            <Route path="configuracoes" element={<Configuracoes />} />
-            <Route path="usuarios" element={<Usuarios />} />
-            <Route path="clientes" element={<Clientes />} />
-            <Route path="acesso-desenvolvedor" element={<AcessoDesenvolvedor />} />
+            <Route path="/dashboard" element={<Dashboard />} />
+            <Route path="/pdv" element={<PDV />} />
+            <Route path="/mesas" element={<Mesas />} />
+            <Route path="/estoque" element={<Estoque />} />
+            <Route path="/produtos" element={<Produtos />} />
+            <Route path="/despesas" element={<Despesas />} />
+            <Route path="/fluxo-caixa" element={<FluxoCaixa />} />
+            <Route path="/relatorios" element={<Relatorios />} />
+            <Route path="/configuracoes" element={<Configuracoes />} />
+            <Route path="/usuarios" element={<Usuarios />} />
+            <Route path="/clientes" element={<Clientes />} />
+            <Route path="/acesso-desenvolvedor" element={<AcessoDesenvolvedor />} />
           </Route>
 
           <Route path="*" element={<Navigate to="/dashboard" replace />} />
