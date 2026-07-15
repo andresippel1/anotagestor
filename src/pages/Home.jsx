@@ -146,7 +146,7 @@ export default function Home() {
               <span className="home-mock-ponto home-mock-ponto-vermelho" />
               <span className="home-mock-ponto home-mock-ponto-amarelo" />
               <span className="home-mock-ponto home-mock-ponto-verde" />
-              <span className="home-mock-url">app.anotagestor.com.br</span>
+              <span className="home-mock-url">painel.anotagestor.com.br</span>
             </div>
 
             <div className="home-mock-corpo">
