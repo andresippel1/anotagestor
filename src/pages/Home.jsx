@@ -1,7 +1,7 @@
 import { Link } from 'react-router-dom'
 import './Home.css'
 
-const NUMERO_WHATSAPP = '5564999862472'
+const NUMERO_WHATSAPP = '5567996153058'
 const MSG_DIAGNOSTICO = encodeURIComponent(
   'Olá! Quero fazer o diagnóstico do meu negócio com o Anota Gestor.'
 )
