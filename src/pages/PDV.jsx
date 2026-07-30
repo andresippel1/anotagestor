@@ -2,6 +2,7 @@ import { useEffect, useState } from 'react'
 import { useSearchParams, useNavigate, Link } from 'react-router-dom'
 import { useAuth } from '../modules/auth/AuthContext'
 import { useMesas } from '../modules/mesas/useMesas'
+import * as mesasApi from '../modules/mesas/mesasApi'
 import { useComanda } from '../modules/pdv/useComanda'
 import { TIPOS_VENDA, rotuloTipoVenda } from '../modules/pdv/tiposVenda'
 import SeletorProdutos from '../modules/pdv/SeletorProdutos'
@@ -16,7 +17,7 @@ import './PDV.css'
 export default function PDV() {
   const [searchParams] = useSearchParams()
   const mesaId = searchParams.get('mesa')
-  const origemVenda = searchParams.get('origem')
+  const origemVenda = searchParams.get('origem') || (mesaId ? 'mesa' : null)
   const navigate = useNavigate()
   const { empresa, nomeUsuario } = useAuth()
 
@@ -25,7 +26,7 @@ export default function PDV() {
   return (
     <ComandaPDV
       mesaId={mesaId}
-      origemVenda={mesaId ? 'mesa' : origemVenda}
+      origemVenda={origemVenda}
       empresa={empresa}
       atendente={nomeUsuario}
       navigate={navigate}
@@ -34,6 +35,7 @@ export default function PDV() {
 }
 
 function SeletorInicial() {
+  const { empresa } = useAuth()
   const { mesas, carregando, abrirMesa } = useMesas()
   const navigate = useNavigate()
   const mesasDisponiveis = mesas.filter((m) => m.status !== 'fechada')
@@ -42,6 +44,11 @@ function SeletorInicial() {
   async function selecionarLivre(mesa) {
     const { error } = await abrirMesa(mesa.id)
     if (!error) navigate(`/pdv?mesa=${mesa.id}`)
+  }
+
+  async function iniciarVendaSemMesa(tipo) {
+    const { data, error } = await mesasApi.criarMesaVirtual(empresa.id, rotuloTipoVenda(tipo.valor))
+    if (!error) navigate(`/pdv?mesa=${data.id}&origem=${tipo.valor}`)
   }
 
   return (
@@ -53,7 +60,7 @@ function SeletorInicial() {
             <button
               key={tipo.valor}
               className="btn btn-secundario pdv-tipo-btn"
-              onClick={() => navigate(`/pdv?origem=${tipo.valor}`)}
+              onClick={() => iniciarVendaSemMesa(tipo)}
             >
               {tipo.rotulo}
             </button>
@@ -110,6 +117,11 @@ function ComandaPDV({ mesaId, origemVenda, empresa, atendente, navigate }) {
   const [modoImpressao, setModoImpressao] = useState(null) // 'cozinha' | 'cliente'
   const [vendaConcluida, setVendaConcluida] = useState(null)
 
+  // Mesa virtual = comanda de delivery/balcão persistida nos bastidores;
+  // não deve aparecer como "Mesa X" em nenhum título ou impressão.
+  const mesaReal = mesa && !mesa.virtual ? mesa : null
+  const rotuloOrigem = !mesaReal ? rotuloTipoVenda(origemVenda) : null
+
   useEffect(() => {
     if (!modoImpressao) return
     imprimirTermica()
@@ -148,7 +160,7 @@ function ComandaPDV({ mesaId, origemVenda, empresa, atendente, navigate }) {
 
   function continuarAposVenda() {
     setVendaConcluida(null)
-    navigate(mesaId ? '/mesas' : '/pdv')
+    navigate(mesaReal ? '/mesas' : '/pdv')
   }
 
   if (carregando) return <p>Carregando comanda...</p>
@@ -172,8 +184,8 @@ function ComandaPDV({ mesaId, origemVenda, empresa, atendente, navigate }) {
         {modoImpressao === 'cliente' && (
           <ComprovanteClienteImpressao
             empresa={empresa}
-            mesa={mesa}
-            rotuloOrigem={!mesaId ? rotuloTipoVenda(origemVenda) : null}
+            mesa={mesaReal}
+            rotuloOrigem={rotuloOrigem}
             itens={vendaConcluida.itens}
             total={vendaConcluida.total}
             formaPagamento={vendaConcluida.formaPagamento}
@@ -187,7 +199,7 @@ function ComandaPDV({ mesaId, origemVenda, empresa, atendente, navigate }) {
   return (
     <div className="pdv-tela">
       <div className="pdv-coluna pdv-coluna-produtos no-imprimir">
-        <h3>{mesaId ? `Mesa ${mesa?.numero}` : rotuloTipoVenda(origemVenda)}</h3>
+        <h3>{mesaReal ? `Mesa ${mesaReal.numero}` : rotuloTipoVenda(origemVenda)}</h3>
         <SeletorProdutos aoSelecionar={adicionarProduto} />
       </div>
 
@@ -247,8 +259,8 @@ function ComandaPDV({ mesaId, origemVenda, empresa, atendente, navigate }) {
       {modoImpressao === 'cozinha' && (
         <ComandaCozinhaImpressao
           empresa={empresa}
-          mesa={mesa}
-          rotuloOrigem={!mesaId ? rotuloTipoVenda(origemVenda) : null}
+          mesa={mesaReal}
+          rotuloOrigem={rotuloOrigem}
           itens={itens}
           atendente={atendente}
         />

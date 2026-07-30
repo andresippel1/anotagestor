@@ -4,13 +4,39 @@ import { demoStore, novoId, agora } from '../../lib/demoStore'
 
 export async function listarMesas(empresaId) {
   if (MODO_DEMO) {
-    return { data: demoStore.mesas.filter((m) => m.empresa_id === empresaId), error: null }
+    return { data: demoStore.mesas.filter((m) => m.empresa_id === empresaId && !m.virtual), error: null }
   }
   return supabase
     .from('mesas')
     .select('*')
     .eq('empresa_id', empresaId)
+    .eq('virtual', false)
     .order('numero', { ascending: true })
+}
+
+// Mesa "invisível", criada nos bastidores pra permitir que pedidos de
+// delivery/balcão sejam salvos item a item, igual às mesas reais —
+// sem aparecer na lista de mesas do estabelecimento.
+export async function criarMesaVirtual(empresaId, rotulo) {
+  if (MODO_DEMO) {
+    const nova = {
+      id: novoId(),
+      empresa_id: empresaId,
+      numero: rotulo,
+      status: 'aberta',
+      virtual: true,
+      aberta_em: agora(),
+      fechada_em: null,
+      created_at: agora(),
+    }
+    demoStore.mesas.push(nova)
+    return { data: nova, error: null }
+  }
+  return supabase
+    .from('mesas')
+    .insert({ empresa_id: empresaId, numero: rotulo, status: 'aberta', virtual: true, aberta_em: new Date().toISOString() })
+    .select()
+    .single()
 }
 
 export async function criarMesa(empresaId, numero) {

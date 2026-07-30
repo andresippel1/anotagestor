@@ -90,7 +90,7 @@ export function useComanda(mesaId, origemVenda = 'mesa') {
       mesaId,
       total,
       formaPagamento,
-      origemVenda: mesaId ? 'mesa' : origemVenda,
+      origemVenda,
     })
     if (error) return { error }
     setItens([])

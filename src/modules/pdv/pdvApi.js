@@ -4,7 +4,7 @@ import { demoStore, novoId, agora } from '../../lib/demoStore'
 import { rotuloTipoVenda } from './tiposVenda'
 
 function descricaoVenda(mesa, origemVenda) {
-  return mesa ? `Venda - Mesa ${mesa.numero}` : `Venda - ${rotuloTipoVenda(origemVenda)}`
+  return mesa && !mesa.virtual ? `Venda - Mesa ${mesa.numero}` : `Venda - ${rotuloTipoVenda(origemVenda)}`
 }
 
 function comProduto(item) {
@@ -118,7 +118,7 @@ export async function finalizarVenda(empresaId, { mesaId = null, total, formaPag
 
   let mesa = null
   if (mesaId) {
-    const { data } = await supabase.from('mesas').select('numero').eq('id', mesaId).single()
+    const { data } = await supabase.from('mesas').select('numero, virtual').eq('id', mesaId).single()
     mesa = data
   }
 
