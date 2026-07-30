@@ -78,8 +78,11 @@ export async function liberarMesa(mesaId) {
   if (MODO_DEMO) {
     const mesa = demoStore.mesas.find((m) => m.id === mesaId)
     Object.assign(mesa, { status: 'livre', aberta_em: null, fechada_em: null })
+    demoStore.comanda_itens = demoStore.comanda_itens.filter((i) => i.mesa_id !== mesaId)
     return { data: mesa, error: null }
   }
+  const { error: erroLimpeza } = await supabase.from('comanda_itens').delete().eq('mesa_id', mesaId)
+  if (erroLimpeza) return { error: erroLimpeza }
   return supabase
     .from('mesas')
     .update({ status: 'livre', aberta_em: null, fechada_em: null })

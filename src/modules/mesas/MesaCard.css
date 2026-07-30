@@ -44,3 +44,14 @@
   font-size: 1.05rem;
   padding: 0.9rem;
 }
+
+.mesa-acoes-duplas {
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+  width: 100%;
+}
+
+.mesa-acoes-duplas .mesa-btn-acao {
+  margin-top: 0;
+}

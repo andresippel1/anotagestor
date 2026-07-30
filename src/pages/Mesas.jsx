@@ -23,6 +23,11 @@ export default function Mesas() {
     await liberarMesa(mesa.id)
   }
 
+  async function aoReabrir(mesa) {
+    const { error } = await liberarMesa(mesa.id)
+    if (!error) await aoAbrir(mesa)
+  }
+
   async function aoCriarMesa(numero) {
     const resultado = await criarMesa(numero)
     if (!resultado.error) setFormularioAberto(false)
@@ -48,6 +53,7 @@ export default function Mesas() {
           aoAbrir={aoAbrir}
           aoLiberar={aoLiberar}
           aoContinuar={aoContinuar}
+          aoReabrir={aoReabrir}
         />
       )}
 
