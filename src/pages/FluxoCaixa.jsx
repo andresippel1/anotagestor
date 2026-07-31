@@ -2,6 +2,7 @@ import { useState } from 'react'
 import { useFluxoCaixa } from '../modules/financeiro/useFluxoCaixa'
 import MovimentosLista from '../modules/financeiro/MovimentosLista'
 import MovimentoFormulario from '../modules/financeiro/MovimentoFormulario'
+import VendaDetalheModal from '../modules/financeiro/VendaDetalheModal'
 import CaixaSessaoCard from '../modules/financeiro/CaixaSessaoCard'
 import CardMetrica from '../components/CardMetrica'
 import { formatMoeda } from '../lib/formatters'
@@ -20,9 +21,11 @@ export default function FluxoCaixa() {
     editarMovimento,
     abrirCaixaDoDia,
     fecharCaixaDoDia,
+    cancelarVenda,
   } = useFluxoCaixa()
   const [formularioAberto, setFormularioAberto] = useState(false)
   const [movimentoEmEdicao, setMovimentoEmEdicao] = useState(null)
+  const [vendaSelecionada, setVendaSelecionada] = useState(null)
 
   function abrirEdicao(movimento) {
     setMovimentoEmEdicao(movimento)
@@ -32,6 +35,12 @@ export default function FluxoCaixa() {
   function fecharFormulario() {
     setFormularioAberto(false)
     setMovimentoEmEdicao(null)
+  }
+
+  async function aoCancelarVenda(movimento) {
+    const resultado = await cancelarVenda(movimento)
+    if (!resultado.error) setVendaSelecionada(null)
+    return resultado
   }
 
   async function salvar(dados) {
@@ -68,13 +77,21 @@ export default function FluxoCaixa() {
 
       {erro && <div className="mensagem-erro">{erro}</div>}
 
-      <MovimentosLista movimentos={movimentos} aoEditar={abrirEdicao} />
+      <MovimentosLista movimentos={movimentos} aoEditar={abrirEdicao} aoVerVenda={setVendaSelecionada} />
 
       {formularioAberto && (
         <MovimentoFormulario
           movimentoInicial={movimentoEmEdicao}
           aoSalvar={salvar}
           aoCancelar={fecharFormulario}
+        />
+      )}
+
+      {vendaSelecionada && (
+        <VendaDetalheModal
+          movimento={vendaSelecionada}
+          aoCancelar={aoCancelarVenda}
+          aoFechar={() => setVendaSelecionada(null)}
         />
       )}
     </div>

@@ -88,6 +88,7 @@ export function useComanda(mesaId, origemVenda = 'mesa') {
   async function fecharVenda(formaPagamento) {
     const { data, error } = await pdvApi.finalizarVenda(empresa.id, {
       mesaId,
+      itens,
       total,
       formaPagamento,
       origemVenda,

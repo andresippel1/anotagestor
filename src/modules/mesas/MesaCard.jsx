@@ -13,9 +13,40 @@ function aoLiberarComConfirmacao(mesa, aoLiberar) {
   if (confirmar) aoLiberar(mesa)
 }
 
-export default function MesaCard({ mesa, aoAbrir, aoLiberar, aoContinuar, aoReabrir }) {
+function aoEditarComPrompt(mesa, aoEditar) {
+  const novoNumero = window.prompt('Novo nome/número da mesa:', mesa.numero)
+  if (novoNumero && novoNumero.trim() && novoNumero.trim() !== mesa.numero) {
+    aoEditar(mesa.id, novoNumero.trim())
+  }
+}
+
+function aoExcluirComConfirmacao(mesa, aoExcluir) {
+  const confirmar = window.confirm(
+    `Excluir Mesa ${mesa.numero}? Essa ação não pode ser desfeita.`
+  )
+  if (confirmar) aoExcluir(mesa.id)
+}
+
+export default function MesaCard({ mesa, aoAbrir, aoLiberar, aoContinuar, aoReabrir, aoEditar, aoExcluir }) {
   return (
     <div className={`mesa-card mesa-${mesa.status}`}>
+      <button
+        type="button"
+        className="mesa-btn-editar"
+        title="Editar nome"
+        onClick={() => aoEditarComPrompt(mesa, aoEditar)}
+      >
+        ✏️
+      </button>
+      <button
+        type="button"
+        className="mesa-btn-excluir"
+        title="Excluir mesa"
+        onClick={() => aoExcluirComConfirmacao(mesa, aoExcluir)}
+      >
+        🗑️
+      </button>
+
       <span className="mesa-numero">Mesa {mesa.numero}</span>
       <span className="mesa-status">{ROTULOS[mesa.status]}</span>
 

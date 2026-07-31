@@ -42,5 +42,33 @@ export function useMesas() {
     return { data }
   }
 
-  return { mesas, carregando, erro, criarMesa, abrirMesa, liberarMesa, recarregar: carregar }
+  async function editarMesa(mesaId, numero) {
+    const { data, error } = await mesasApi.editarMesa(mesaId, numero)
+    if (error) return { error }
+    setMesas((atual) =>
+      atual
+        .map((m) => (m.id === mesaId ? data : m))
+        .sort((a, b) => a.numero.localeCompare(b.numero, undefined, { numeric: true }))
+    )
+    return { data }
+  }
+
+  async function excluirMesa(mesaId) {
+    const { error } = await mesasApi.excluirMesa(mesaId)
+    if (error) return { error }
+    setMesas((atual) => atual.filter((m) => m.id !== mesaId))
+    return {}
+  }
+
+  return {
+    mesas,
+    carregando,
+    erro,
+    criarMesa,
+    abrirMesa,
+    liberarMesa,
+    editarMesa,
+    excluirMesa,
+    recarregar: carregar,
+  }
 }

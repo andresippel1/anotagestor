@@ -6,7 +6,7 @@ import NovaMesaFormulario from '../modules/mesas/NovaMesaFormulario'
 import './Mesas.css'
 
 export default function Mesas() {
-  const { mesas, carregando, erro, criarMesa, abrirMesa, liberarMesa } = useMesas()
+  const { mesas, carregando, erro, criarMesa, abrirMesa, liberarMesa, editarMesa, excluirMesa } = useMesas()
   const [formularioAberto, setFormularioAberto] = useState(false)
   const navigate = useNavigate()
 
@@ -54,6 +54,8 @@ export default function Mesas() {
           aoLiberar={aoLiberar}
           aoContinuar={aoContinuar}
           aoReabrir={aoReabrir}
+          aoEditar={editarMesa}
+          aoExcluir={excluirMesa}
         />
       )}
 

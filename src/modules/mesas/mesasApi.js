@@ -91,6 +91,23 @@ export async function liberarMesa(mesaId) {
     .single()
 }
 
+export async function editarMesa(mesaId, numero) {
+  if (MODO_DEMO) {
+    const mesa = demoStore.mesas.find((m) => m.id === mesaId)
+    mesa.numero = numero
+    return { data: mesa, error: null }
+  }
+  return supabase.from('mesas').update({ numero }).eq('id', mesaId).select().single()
+}
+
+export async function excluirMesa(mesaId) {
+  if (MODO_DEMO) {
+    demoStore.mesas = demoStore.mesas.filter((m) => m.id !== mesaId)
+    return { error: null }
+  }
+  return supabase.from('mesas').delete().eq('id', mesaId)
+}
+
 export async function fecharMesa(mesaId) {
   if (MODO_DEMO) {
     const mesa = demoStore.mesas.find((m) => m.id === mesaId)

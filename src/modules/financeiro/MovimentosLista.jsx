@@ -7,7 +7,7 @@ const ORIGENS = {
   despesa: 'Despesa',
 }
 
-export default function MovimentosLista({ movimentos, aoEditar }) {
+export default function MovimentosLista({ movimentos, aoEditar, aoVerVenda }) {
   if (movimentos.length === 0) {
     return <p className="estoque-vazio">Nenhum movimento registrado ainda.</p>
   }
@@ -41,6 +41,11 @@ export default function MovimentosLista({ movimentos, aoEditar }) {
                 {mov.origem === 'manual' && (
                   <button className="btn btn-secundario" onClick={() => aoEditar(mov)}>
                     Editar
+                  </button>
+                )}
+                {mov.origem === 'venda' && (
+                  <button className="btn btn-secundario" onClick={() => aoVerVenda(mov)}>
+                    Ver itens
                   </button>
                 )}
               </td>

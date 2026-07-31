@@ -1,6 +1,7 @@
 import { useCallback, useEffect, useState } from 'react'
 import { useAuth } from '../auth/AuthContext'
 import * as caixaApi from './caixaApi'
+import * as vendasApi from './vendasApi'
 
 export function useFluxoCaixa() {
   const { empresa } = useAuth()
@@ -55,6 +56,13 @@ export function useFluxoCaixa() {
     return { data }
   }
 
+  async function cancelarVenda(movimento) {
+    const { error } = await vendasApi.cancelarVenda(movimento.origem_id, movimento.id)
+    if (error) return { error }
+    setMovimentos((atual) => atual.filter((m) => m.id !== movimento.id))
+    return {}
+  }
+
   const totalEntradas = movimentos
     .filter((m) => m.tipo === 'entrada')
     .reduce((acc, m) => acc + Number(m.valor), 0)
@@ -77,6 +85,7 @@ export function useFluxoCaixa() {
     editarMovimento,
     abrirCaixaDoDia,
     fecharCaixaDoDia,
+    cancelarVenda,
     recarregar: carregar,
   }
 }

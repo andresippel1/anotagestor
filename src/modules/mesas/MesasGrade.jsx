@@ -1,7 +1,7 @@
 import MesaCard from './MesaCard'
 import './MesasGrade.css'
 
-export default function MesasGrade({ mesas, aoAbrir, aoLiberar, aoContinuar, aoReabrir }) {
+export default function MesasGrade({ mesas, aoAbrir, aoLiberar, aoContinuar, aoReabrir, aoEditar, aoExcluir }) {
   if (mesas.length === 0) {
     return <p className="mesas-vazio">Nenhuma mesa cadastrada ainda. Crie a primeira mesa.</p>
   }
@@ -16,6 +16,8 @@ export default function MesasGrade({ mesas, aoAbrir, aoLiberar, aoContinuar, aoR
           aoLiberar={aoLiberar}
           aoContinuar={aoContinuar}
           aoReabrir={aoReabrir}
+          aoEditar={aoEditar}
+          aoExcluir={aoExcluir}
         />
       ))}
     </div>

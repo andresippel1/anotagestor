@@ -85,7 +85,7 @@ export async function removerItemComanda(itemId) {
   return supabase.from('comanda_itens').delete().eq('id', itemId)
 }
 
-export async function finalizarVenda(empresaId, { mesaId = null, total, formaPagamento, origemVenda = 'mesa' }) {
+export async function finalizarVenda(empresaId, { mesaId = null, itens = [], total, formaPagamento, origemVenda = 'mesa' }) {
   if (MODO_DEMO) {
     const mesa = mesaId ? demoStore.mesas.find((m) => m.id === mesaId) : null
     const venda = {
@@ -99,6 +99,19 @@ export async function finalizarVenda(empresaId, { mesaId = null, total, formaPag
       created_at: agora(),
     }
     demoStore.vendas.push(venda)
+    demoStore.venda_itens = demoStore.venda_itens ?? []
+    demoStore.venda_itens.push(
+      ...itens.map((item) => ({
+        id: novoId(),
+        empresa_id: empresaId,
+        venda_id: venda.id,
+        produto_id: item.produto_id,
+        produto_nome: item.produtos?.nome ?? 'Produto',
+        quantidade: item.quantidade,
+        preco_unitario: item.preco_unitario,
+        created_at: agora(),
+      }))
+    )
     demoStore.caixa_movimentos.push({
       id: novoId(),
       empresa_id: empresaId,
@@ -136,6 +149,20 @@ export async function finalizarVenda(empresaId, { mesaId = null, total, formaPag
     .single()
 
   if (erroVenda) return { error: erroVenda }
+
+  if (itens.length > 0) {
+    const { error: erroItens } = await supabase.from('venda_itens').insert(
+      itens.map((item) => ({
+        empresa_id: empresaId,
+        venda_id: venda.id,
+        produto_id: item.produto_id,
+        produto_nome: item.produtos?.nome ?? 'Produto',
+        quantidade: item.quantidade,
+        preco_unitario: item.preco_unitario,
+      }))
+    )
+    if (erroItens) return { error: erroItens }
+  }
 
   const { error: erroCaixa } = await supabase.from('caixa_movimentos').insert({
     empresa_id: empresaId,
