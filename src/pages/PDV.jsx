@@ -51,28 +51,48 @@ function SeletorInicial() {
     if (!error) navigate(`/pdv?mesa=${data.id}&origem=${tipo.valor}`)
   }
 
+  function numeroDaMesa(numero) {
+    return String(numero).replace(/^mesa\s*/i, '')
+  }
+
   return (
     <div className="pdv-seletor-inicial">
       <div className="card pdv-seletor-tipos">
-        <h3>Nova venda</h3>
+        <div className="pdv-seletor-cabecalho">
+          <div>
+            <h3>Como será esta venda?</h3>
+            <p>Escolha de onde veio o pedido para começar.</p>
+          </div>
+          <span className="pdv-seletor-passo">1º passo</span>
+        </div>
         <div className="pdv-tipos-grade">
           {TIPOS_VENDA.filter((t) => t.valor !== 'mesa').map((tipo) => (
             <button
               key={tipo.valor}
-              className="btn btn-secundario pdv-tipo-btn"
+              className={`pdv-tipo-btn pdv-tipo-btn--${tipo.classe}`}
               onClick={() => iniciarVendaSemMesa(tipo)}
             >
-              {tipo.rotulo}
+              <span className="pdv-tipo-icone" aria-hidden="true">{tipo.icone}</span>
+              <span className="pdv-tipo-conteudo">
+                <strong>{tipo.rotulo}</strong>
+                <small>{tipo.descricao}</small>
+              </span>
+              <span className="pdv-tipo-seta" aria-hidden="true">›</span>
             </button>
           ))}
         </div>
       </div>
 
       <div className="card pdv-seletor-mesa">
-        <h3>
-          Ou selecione uma mesa
-          {mesasAbertas > 0 && <span className="badge-mesas-abertas">{mesasAbertas} aberta(s)</span>}
-        </h3>
+        <div className="pdv-mesas-cabecalho">
+          <div>
+            <h3>Atendimento nas mesas</h3>
+            <p>Selecione uma mesa para abrir ou continuar a comanda.</p>
+          </div>
+          {mesasAbertas > 0 && (
+            <span className="badge-mesas-abertas">{mesasAbertas} em atendimento</span>
+          )}
+        </div>
         {carregando ? (
           <p>Carregando mesas...</p>
         ) : mesasDisponiveis.length === 0 ? (
@@ -84,13 +104,20 @@ function SeletorInicial() {
             {mesasDisponiveis.map((mesa) => (
               <button
                 key={mesa.id}
-                className="btn btn-secundario pdv-seletor-mesa-btn"
+                className={`pdv-seletor-mesa-btn pdv-seletor-mesa-btn--${mesa.status}`}
                 onClick={() =>
                   mesa.status === 'livre' ? selecionarLivre(mesa) : navigate(`/pdv?mesa=${mesa.id}`)
                 }
               >
-                Mesa {mesa.numero}
-                <span className="tag tag-alerta">{mesa.status}</span>
+                <span className="pdv-mesa-icone" aria-hidden="true">🍽️</span>
+                <span className="pdv-mesa-conteudo">
+                  <small>Mesa</small>
+                  <strong>{numeroDaMesa(mesa.numero)}</strong>
+                </span>
+                <span className="pdv-mesa-status">
+                  <i aria-hidden="true" />
+                  {mesa.status === 'livre' ? 'Livre' : 'Em atendimento'}
+                </span>
               </button>
             ))}
           </div>

@@ -56,51 +56,239 @@
   display: flex;
   flex-direction: column;
   gap: 1.25rem;
-  max-width: 640px;
+  max-width: 860px;
+}
+
+.pdv-seletor-tipos {
+  padding: 1.35rem;
+}
+
+.pdv-seletor-cabecalho {
+  display: flex;
+  align-items: flex-start;
+  justify-content: space-between;
+  gap: 1rem;
+}
+
+.pdv-seletor-cabecalho h3 {
+  margin: 0;
+  font-size: 1.15rem;
+}
+
+.pdv-seletor-cabecalho p {
+  margin: 0.35rem 0 0;
+  color: var(--cor-texto-secundario);
+  font-size: 0.88rem;
+}
+
+.pdv-seletor-passo {
+  flex: 0 0 auto;
+  padding: 0.25rem 0.55rem;
+  border: 1px solid color-mix(in srgb, var(--cor-primaria) 35%, var(--cor-borda));
+  border-radius: 999px;
+  background: color-mix(in srgb, var(--cor-primaria) 9%, transparent);
+  color: var(--cor-primaria);
+  font-size: 0.7rem;
+  font-weight: 700;
+  text-transform: uppercase;
 }
 
 .pdv-tipos-grade {
   display: grid;
-  grid-template-columns: repeat(auto-fill, minmax(150px, 1fr));
+  grid-template-columns: repeat(3, minmax(0, 1fr));
   gap: 0.75rem;
-  margin-top: 1rem;
+  margin-top: 1.15rem;
 }
 
 .pdv-tipo-btn {
-  padding: 1.25rem 0.75rem;
-  font-size: 1.1rem;
+  --cor-origem: var(--cor-primaria);
+  display: grid;
+  grid-template-columns: auto minmax(0, 1fr) auto;
+  align-items: center;
+  gap: 0.75rem;
+  min-height: 92px;
+  padding: 1rem;
+  border: 1px solid var(--cor-borda);
+  border-radius: var(--raio);
+  background: var(--cor-fundo-elevado);
+  color: var(--cor-texto);
+  text-align: left;
+  box-shadow: inset 0 3px 0 var(--cor-origem);
+  transition: border-color 0.15s ease, background 0.15s ease, transform 0.15s ease;
+}
+
+.pdv-tipo-btn:hover {
+  border-color: color-mix(in srgb, var(--cor-origem) 55%, var(--cor-borda));
+  background: color-mix(in srgb, var(--cor-origem) 6%, var(--cor-fundo-elevado));
+  transform: translateY(-2px);
+}
+
+.pdv-tipo-btn:active {
+  transform: scale(0.98);
+}
+
+.pdv-tipo-btn:focus-visible {
+  outline: 2px solid var(--cor-origem);
+  outline-offset: 2px;
+}
+
+.pdv-tipo-btn--whatsapp { --cor-origem: #34d399; }
+.pdv-tipo-btn--delivery { --cor-origem: #818cf8; }
+.pdv-tipo-btn--balcao { --cor-origem: var(--cor-primaria); }
+
+.pdv-tipo-icone {
+  display: grid;
+  place-items: center;
+  width: 42px;
+  height: 42px;
+  border-radius: 11px;
+  background: color-mix(in srgb, var(--cor-origem) 13%, var(--cor-fundo-card));
+  font-size: 1.25rem;
+}
+
+.pdv-tipo-conteudo {
+  display: flex;
+  flex-direction: column;
+  gap: 0.28rem;
+  min-width: 0;
+}
+
+.pdv-tipo-conteudo strong {
+  font-size: 0.92rem;
+  line-height: 1.25;
+}
+
+.pdv-tipo-conteudo small {
+  color: var(--cor-texto-secundario);
+  font-size: 0.73rem;
+  line-height: 1.35;
+}
+
+.pdv-tipo-seta {
+  color: var(--cor-origem);
+  font-size: 1.4rem;
+  line-height: 1;
 }
 
 .badge-mesas-abertas {
-  display: inline-block;
-  margin-left: 0.6rem;
-  padding: 0.2rem 0.6rem;
+  flex: 0 0 auto;
+  padding: 0.3rem 0.65rem;
   border-radius: 999px;
-  background: var(--cor-alerta);
-  color: #14161a;
-  font-size: 0.8rem;
+  background: color-mix(in srgb, var(--cor-alerta) 14%, transparent);
+  color: var(--cor-alerta);
+  font-size: 0.72rem;
   font-weight: 700;
-  vertical-align: middle;
 }
 
 .pdv-seletor-mesa {
-  max-width: 640px;
+  max-width: 860px;
+  padding: 1.35rem;
+}
+
+.pdv-mesas-cabecalho {
+  display: flex;
+  align-items: flex-start;
+  justify-content: space-between;
+  gap: 1rem;
+}
+
+.pdv-mesas-cabecalho h3 {
+  margin: 0;
+  font-size: 1.15rem;
+}
+
+.pdv-mesas-cabecalho p {
+  margin: 0.35rem 0 0;
+  color: var(--cor-texto-secundario);
+  font-size: 0.88rem;
 }
 
 .pdv-seletor-mesa-grade {
   display: grid;
-  grid-template-columns: repeat(auto-fill, minmax(140px, 1fr));
+  grid-template-columns: repeat(auto-fill, minmax(180px, 1fr));
   gap: 0.75rem;
-  margin-top: 1rem;
+  margin-top: 1.15rem;
 }
 
 .pdv-seletor-mesa-btn {
-  display: flex;
-  flex-direction: column;
+  --cor-status-mesa: #34d399;
+  display: grid;
+  grid-template-columns: auto minmax(0, 1fr);
   align-items: center;
-  gap: 0.5rem;
-  padding: 1.25rem 0.75rem;
-  font-size: 1.1rem;
+  gap: 0.75rem;
+  min-height: 92px;
+  padding: 0.9rem;
+  border: 1px solid var(--cor-borda);
+  border-radius: var(--raio);
+  background: var(--cor-fundo-elevado);
+  color: var(--cor-texto);
+  text-align: left;
+  box-shadow: inset 3px 0 0 var(--cor-status-mesa);
+  transition: border-color 0.15s ease, background 0.15s ease, transform 0.15s ease;
+}
+
+.pdv-seletor-mesa-btn--aberta {
+  --cor-status-mesa: var(--cor-alerta);
+}
+
+.pdv-seletor-mesa-btn:hover {
+  border-color: color-mix(in srgb, var(--cor-status-mesa) 50%, var(--cor-borda));
+  background: color-mix(in srgb, var(--cor-status-mesa) 5%, var(--cor-fundo-elevado));
+  transform: translateY(-2px);
+}
+
+.pdv-seletor-mesa-btn:active {
+  transform: scale(0.98);
+}
+
+.pdv-seletor-mesa-btn:focus-visible {
+  outline: 2px solid var(--cor-status-mesa);
+  outline-offset: 2px;
+}
+
+.pdv-mesa-icone {
+  display: grid;
+  place-items: center;
+  width: 42px;
+  height: 42px;
+  border-radius: 11px;
+  background: color-mix(in srgb, var(--cor-status-mesa) 12%, var(--cor-fundo-card));
+  font-size: 1.15rem;
+}
+
+.pdv-mesa-conteudo {
+  display: flex;
+  align-items: baseline;
+  gap: 0.35rem;
+}
+
+.pdv-mesa-conteudo small {
+  color: var(--cor-texto-secundario);
+  font-size: 0.78rem;
+  font-weight: 600;
+}
+
+.pdv-mesa-conteudo strong {
+  font-size: 1.35rem;
+}
+
+.pdv-mesa-status {
+  grid-column: 1 / -1;
+  display: inline-flex;
+  align-items: center;
+  gap: 0.38rem;
+  width: fit-content;
+  color: var(--cor-status-mesa);
+  font-size: 0.72rem;
+  font-weight: 700;
+}
+
+.pdv-mesa-status i {
+  width: 7px;
+  height: 7px;
+  border-radius: 50%;
+  background: currentColor;
+  box-shadow: 0 0 0 3px color-mix(in srgb, currentColor 12%, transparent);
 }
 
 @media (min-width: 960px) {
@@ -117,6 +305,24 @@
 
   .pdv-coluna-produtos {
     flex: 1;
+  }
+}
+
+@media (max-width: 760px) {
+  .pdv-tipos-grade {
+    grid-template-columns: 1fr;
+  }
+
+  .pdv-tipo-btn {
+    min-height: 78px;
+  }
+
+  .pdv-mesas-cabecalho {
+    flex-direction: column;
+  }
+
+  .pdv-seletor-mesa-grade {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
   }
 }
 
